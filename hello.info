@@ -1,0 +1,6 @@
+name = Hello 
+description = Greet hello in different languages.
+core = 7.x
+
+files[] = hello.module
+

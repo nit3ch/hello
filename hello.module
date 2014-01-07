@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+function hello_block_info() {
+  $blocks = array();
+  $blocks['hello_block'] = array(
+    'info' => t('Say Hello to user in different languages.'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function hello_block_view($delta='') {
+  $block = array();
+  $message = greet_hello();
+  switch($delta) {
+    case 'hello_block' :
+      $block['subject'] = '';
+      $block['content'] = t($message);
+      break;
+  }
+
+  return $block;
+}
+
+function greet_hello() {
+  global $user;
+  $name = $user->name;
+  $hellos = get_hello();
+  $random_hello = array_rand($hellos,2);
+  $hello = $hellos[$random_hello[0]];
+  $message = '<h1>' . $hello . ' ' . $name . '</h1></br>';
+  $message .= t('<p id="hello_des">Now you know how to greet people in '. $random_hello[0].'</p>');
+  return $message;
+}
+/**
+ * Get random hello in different languages.
+ */
+function get_hello() {
+  $hellos = array(
+    "Afrikaans" => "Haai",
+    "Albanian" => "Tungjatjeta",
+    "A'Leamona" => "Tél-nìdõ",
+    "Armenian" => "Barev",
+    "Azerbaijani" => "Salam",
+    "Bremnian" => "Koali",
+    "Bulgarian" => "Zdrasti",
+    "Burmese" => "Mingalarbar",
+    "Catalan" => "Hola",
+    "Congo" => "Mambo",
+    "Cree" => "Tansi",
+    "Croatian" => "Bok",
+    "Czech" => "Ahoj",
+    "Dutch" => "Hoi",
+    "English" => "Hello",
+    "Fijian" => "Bula",
+    "French" => "Bonjour",
+    "Georgian" => "Gamardjoba",
+    "Gujarathi" => "Kem-che",
+    "Greek" => "Yia Sou",
+    "Hawaiian" => "Aloha",
+    "Hebrew" => "Shalom",
+    "Hindi" => "Namaste",
+    "Kannada" => "Namaskara",
+    "Klingon" => "NuqneH?",
+    "Latin" => "Salve",
+    "Luxembourgish" => "Moïen",
+    "Mandarin" => "Ni Hao",
+    "Maori" => "Kia-ora",
+    "Northern German" => "Moin Moin",
+    "Scanian" => "Haja",
+    "Senegal" => "Salamaleikum",
+    "Swiss German" => "Grüzi",
+    "Tamil" => "Vanakkam",
+    "Telugu" => "Baagunnara",
+    "Welsh" => "Shwmae",
+    "Zulu" => "Sawubona"
+  );
+  return $hellos;
+}
