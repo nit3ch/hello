@@ -1,4 +1,4 @@
 hello
 =====
 
-Greet hello in different languages exactly like flickr !
+Drupal module to greet hello in different languages exactly like flickr !
