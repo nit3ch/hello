@@ -16,8 +16,11 @@ function hello_block_info() {
  * Implements hook_block_view().
  */
 function hello_block_view($delta='') {
+  global $user;
+  $name = $user->name;
+  $subtitle = 'Now you know how to greet peoples in';
   $block = array();
-  $message = greet_hello();
+  $message = greet_hello($name,$subtitle);
   switch($delta) {
     case 'hello_block' :
       $block['subject'] = '';
@@ -28,14 +31,12 @@ function hello_block_view($delta='') {
   return $block;
 }
 
-function greet_hello() {
-  global $user;
-  $name = $user->name;
+function greet_hello($name,$subtitle) {
   $hellos = get_hello();
   $random_hello = array_rand($hellos,2);
   $hello = $hellos[$random_hello[0]];
-  $message = '<h1>' . $hello . ' ' . $name . '</h1></br>';
-  $message .= t('<p id="hello_des">Now you know how to greet people in '. $random_hello[0].'</p>');
+  $message = '<div id="greeting">' . $hello . ' ' . $name . '</div></br>';
+  $message .= t('<p id="hello_des">' .$subtitle .' '. $random_hello[0].'</p>');
   return $message;
 }
 /**
@@ -79,7 +80,9 @@ function get_hello() {
     "Tamil" => "Vanakkam",
     "Telugu" => "Baagunnara",
     "Welsh" => "Shwmae",
-    "Zulu" => "Sawubona"
+    "Zulu" => "Sawubona",
+    'Aragonese' => "Ola",
+
   );
   return $hellos;
 }
