@@ -18,7 +18,7 @@ function hello_block_info() {
 function hello_block_view($delta='') {
   global $user;
   $name = $user->name;
-  $subtitle = 'Now you know how to greet peoples in';
+  $subtitle = 'Now you know how to greet people in';
   $block = array();
   $message = greet_hello($name,$subtitle);
   switch($delta) {
@@ -31,12 +31,13 @@ function hello_block_view($delta='') {
   return $block;
 }
 
-function greet_hello($name,$subtitle) {
+function greet_hello($name='User',$subtitle='') {
   $hellos = get_hello();
   $random_hello = array_rand($hellos,2);
   $hello = $hellos[$random_hello[0]];
-  $message = '<div id="greeting">' . $hello . ' ' . $name . '</div></br>';
-  $message .= t('<p id="hello_des">' .$subtitle .' '. $random_hello[0].'</p>');
+  $message = '<div id="greeting">' . $hello . ' ' . $name . '</div>';
+  if(!$subtitle=='') {
+  $message .= t('</br><p id="hello_des">' .$subtitle .' '. $random_hello[0].'</p>');}
   return $message;
 }
 /**
@@ -46,42 +47,119 @@ function get_hello() {
   $hellos = array(
     "Afrikaans" => "Haai",
     "Albanian" => "Tungjatjeta",
+    "Alsatian" => "Boushur",
     "A'Leamona" => "Tél-nìdõ",
+    "Aragonese" => "Ola",
+    "Arapaho" => "Héébee",
+    "Arrernte" => "Werte",
     "Armenian" => "Barev",
+    "Asturian" => "Bonos díes",
     "Azerbaijani" => "Salam",
+    "Basque" => "Kaixo",
     "Bremnian" => "Koali",
+    "Breton" => "Salud",
     "Bulgarian" => "Zdrasti",
     "Burmese" => "Mingalarbar",
     "Catalan" => "Hola",
+    "Chechen" => "Салам",
+    "Chichewa" => "Moni",
+    "Cherokee" => "Osiyo/Siyo",
+    "Chinese" => "néih hóu",
+    "Choctaw" => "Halito",
+    "Cimbrian" => "Guuten takh",
+    "Cornish" => "Hou",
+    "Corsican" => "Bonghjornu",
     "Congo" => "Mambo",
     "Cree" => "Tansi",
     "Croatian" => "Bok",
     "Czech" => "Ahoj",
+    "Danish" => "Hej",
     "Dutch" => "Hoi",
+    "Esperanto" => "Saluton",
+    "Estonian" => "tere",
     "English" => "Hello",
+    "Faroese" => "Hallo",
     "Fijian" => "Bula",
     "French" => "Bonjour",
+    "Frisian" => "Goeie",
+    "Friulian" => "Mandi",
+    "Galician" => "Ola",
+    "German" => "Hallo",
+    "Greenlandic" => "Haluu",
     "Georgian" => "Gamardjoba",
     "Gujarathi" => "Kem-che",
     "Greek" => "Yia Sou",
+    "Haitian Creole" => "Bonjou",
+    "Herero" => "Tjike",
     "Hawaiian" => "Aloha",
     "Hebrew" => "Shalom",
+    "Himba" => "Mono",
     "Hindi" => "Namaste",
+    "Hungarian" => "Szia",
+    "Ido" => "Saluto",
+    "Igbo" => "Ndêwó",
+    "Indonesian" => "Halo",
+    "Interlingua" => "Bon die!",
+    "Inuktitut" => "Ai",
+    "Iñupiaq" => "Halauġikpiñ",
+    "Irish" => "dia duit",
+    "Italian" => "Ciao",
+    "Japanese" => "Konnichiwa",
+    "Jèrriais" => "Bouônjour",
     "Kannada" => "Namaskara",
+    "Khmer" => "Chomreabsuor",
+    "Kinyarwanda" => "Muraho",
     "Klingon" => "NuqneH?",
+    "Korean" => "Annyeonghaseyo",
+    "Kurdish" => "Silaw",
+    "Lakota Sioux" => "Hau",
     "Latin" => "Salve",
+    "Latvian" => "Sveiki",
     "Luxembourgish" => "Moïen",
+    "Limburgish" => "Hallo",
+    "Lithuanian" => "Labas",
+    "Low Saxon" => "Moin",
+    "Macedonian" => "Zdravo",
+    "Maltese" => "Aw",
+    "Mongolian" => "Sain baina",
     "Mandarin" => "Ni Hao",
     "Maori" => "Kia-ora",
+    "Nahuatl" => "Nano toka",
+    "Navajo" => "Yá'át'ééh",
+    "Ndebele" => "Salibonani",
+    "Norwegian" => "Hallo",
+    "Occitan" => "Adieussiatz!",
+    "Ojibwe" => "Boozhoo",
+    "Papiamento" => "Bon dia",
+    "Pitjantjatjara" => "Wai",
+    "Polish" => "Cześć!",
+    "Portuguese" => "Olá",
+    "Punjabi" => "Sat Sri Akaal Ji",
+    "Quechua" => "Rimaykullayki",
+    "Romanian" => "Alo",
+    "Romansh" => "Allegra",
+    "Russian" => "Zdravstvuj",
     "Northern German" => "Moin Moin",
     "Scanian" => "Haja",
     "Senegal" => "Salamaleikum",
+    "Samoan" => "Talofa",
+    "Sardinian" => "Bone die",
+    "Slovenian" => "Pozdravljeni",
+    "Somali" => "Is ka warran",
+    "Spanish" => "Hola",
+    "Stellingwarfs" => "Hoj",
     "Swiss German" => "Grüzi",
     "Tamil" => "Vanakkam",
+    "Tswana" => "Dumela",
     "Telugu" => "Baagunnara",
+    "Venda" => "I nhlikanhi",
+    "Volapük" => "Glidis",
+    "Võro" => "Tereq",
+    "Walloon" => "Bondjoû",
+    "Warlpiri" => "Ngurrju mayinpa",
     "Welsh" => "Shwmae",
+    "Yapese" => "Mogethin",
     "Zulu" => "Sawubona",
-    'Aragonese' => "Ola",
 
   );
   return $hellos;
